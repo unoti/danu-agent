@@ -1,4 +1,7 @@
+# Danu-specific things that should not go in source control:
 venv/
+config/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
