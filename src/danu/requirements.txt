@@ -1,4 +1,5 @@
 azure-identity
 beautifulsoup4
+markdownify
 ipykernel
 msal

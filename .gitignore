@@ -1,6 +1,8 @@
 # Danu-specific things that should not go in source control:
 venv/
 config/
+# Any directory named 'local' gets excluded.
+*local/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
