@@ -6,6 +6,10 @@ class SecretsProvider(ABC):
     
     We can provide secrets in many ways such as Azure Key Vault or Kubernetes Secrets.
     """
+    class NotFound(Exception):
+        """Raised when a secret is not found."""
+        pass
+
     @abstractmethod
     def get_secret(self, name: str) -> str:
         pass
@@ -21,12 +25,19 @@ class LocalJsonSecretsProvider(SecretsProvider):
         self._filename = filename
 
     def get_secret(self, name: str) -> str:
+        """The file is assumed to be structures as nested dictionaries.
+        You can refer to levels with dotted notation."""
         content = self._load()
+        val = content
+        for level_name in name.split('.'):
+            val = val.get(level_name)
+            if not val:
+                raise SecretsProvider.NotFound(f'Unable to find secret {name}')
+        return val
     
     def _load(self) -> dict:
         # We're reading the file every time it's used because we want to recognize changes.
         # This is inefficient but not worth optimizing for now.
         with open(self._filename, 'r') as f:
             result = json.load(f)
-            print(type(result))
-            print(result)
+            return result

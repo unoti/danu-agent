@@ -1,0 +1,2 @@
+from msal import ConfidentialClientApplication
+

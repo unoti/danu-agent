@@ -1,1 +1,3 @@
+azure-identity
 ipykernel
+msal
