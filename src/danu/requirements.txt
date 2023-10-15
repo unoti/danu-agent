@@ -1,3 +1,4 @@
 azure-identity
+beautifulsoup4
 ipykernel
 msal
